@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Family</title>
+    <link rel="stylesheet" th:href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<div class="center">
+    <div class="content">
+        <div class="familyForm">
+            <form method="post" th:action="@{/createNewFamily}" th:object="${family}">
+                <p>Family Name</p>
+                <input type="text" class="form-control" th:field="*{familyName}">
+                <p>Number Of Infants</p>
+                <input type="number" class="form-control" th:field="*{nrOfInfants}">
+                <p>Number Of Children</p>
+                <input type="number" class="form-control" th:field="*{nrOfChildren}">
+                <p>Number Of Adults</p>
+                <input type="number" class="form-control" th:field="*{nrOfAdults}">
+                <button class="btn btn-secondary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

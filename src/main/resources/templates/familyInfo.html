@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|Family: ${family.familyName}|"></title>
+    <link rel="stylesheet" th:href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+<div class="content">
+    <div class="center">
+        <h3 th:text="|Family ${family.familyName} contains:|"></h3>
+        <p th:text="|${family.nrOfAdults} Adults|"></p>
+        <p th:text="|${family.nrOfChildren} Children|"></p>
+        <p th:text="|${family.nrOfInfants} Infants|"></p>
+        <h4>Family Members:</h4>
+        <div th:if="${familyMembers.size} > 0">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="familyMember: ${familyMembers}" th:object="${familyMember}">
+                    <td th:text="*{givenName}"></td>
+                    <td th:text="*{familyName}"></td>
+                    <td th:text="*{age}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:unless="${familyMembers.size} > 0">
+            <p>There is no member in this family:(</p>
+        </div>
+    </div>
+    <a th:href="@{/}" class="btn btn-secondary">Back to main page</a>
+</div>
+</body>
+</html>
