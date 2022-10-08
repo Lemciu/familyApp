@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Find Family</title>
     <link rel="stylesheet" th:href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -13,7 +13,7 @@
         <div class="findFamily">
             <h3>Type below FamilyNumber to find family</h3>
             <form method="get" th:action="@{/getFamily}">
-                <input type="number" class="form-control" th:name="id" th:id="id">
+                <input type="number" class="form-control" th:name="id" th:id="id"  th:required="required">
                 <input type="submit" class="btn btn-secondary" th:value="Find">
             </form>
         </div>

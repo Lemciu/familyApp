@@ -1,7 +1,7 @@
 package pl.ml.model.family;
 
 import javax.persistence.*;
-//Lombok
+
 @Entity
 public class Family {
     @Id
@@ -11,22 +11,9 @@ public class Family {
     private Integer nrOfAdults;
     private Integer nrOfChildren;
     private Integer nrOfInfants;
-
     private static Long currentFamilyId;
 
-    public static Long getCurrentFamilyId() {
-        return currentFamilyId;
-    }
-
-    public static void setCurrentFamilyId(Long currentFamilyId) {
-        Family.currentFamilyId = currentFamilyId;
-    }
-
     public Family() {
-    }
-
-    public Family(String familyName) {
-        this.familyName = familyName;
     }
 
     public Family(String familyName, Integer nrOfAdults, Integer nrOfChildren, Integer nrOfInfants) {
@@ -74,6 +61,14 @@ public class Family {
 
     public void setNrOfInfants(Integer nrOfInfants) {
         this.nrOfInfants = nrOfInfants;
+    }
+
+    public static Long getCurrentFamilyId() {
+        return currentFamilyId;
+    }
+
+    public static void setCurrentFamilyId(Long currentFamilyId) {
+        Family.currentFamilyId = currentFamilyId;
     }
 
 }

@@ -1,6 +1,5 @@
 package pl.ml.service;
 
-import io.micrometer.core.ipc.http.HttpSender;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -8,7 +7,6 @@ import pl.ml.model.family.Family;
 import pl.ml.repository.FamilyRepository;
 import pl.ml.model.familyMember.FamilyMember;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -63,12 +61,7 @@ public class FamilyService {
 
     public void saveFamilyMember() {
         RestTemplate restTemplate = new RestTemplate();
-        System.out.println("beng!");
         restTemplate.execute("http://localhost:8080/createFamilyMember", HttpMethod.GET, null, null);
-//        restTemplate.getForObject("http://localhost:8080/createFamilyMember", FamilyMember.class);
-//        restTemplate.delete("http://localhost:8080/createFamilyMember");
-//        FamilyMember[] forObject = restTemplate.getForObject("http://localhost:8080/createFamilyMember", FamilyMember[].class);
-//        List<FamilyMember> members = Arrays.asList(forObject);
     }
 
 }

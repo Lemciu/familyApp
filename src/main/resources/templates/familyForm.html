@@ -13,13 +13,13 @@
         <div class="familyForm">
             <form method="post" th:action="@{/createNewFamily}" th:object="${family}">
                 <p>Family Name</p>
-                <input type="text" class="form-control" th:field="*{familyName}">
+                <input type="text" class="form-control" th:field="*{familyName}" th:required="required">
                 <p>Number Of Infants</p>
-                <input type="number" class="form-control" th:field="*{nrOfInfants}">
+                <input type="number" class="form-control" th:field="*{nrOfInfants}" th:required="required">
                 <p>Number Of Children</p>
-                <input type="number" class="form-control" th:field="*{nrOfChildren}">
+                <input type="number" class="form-control" th:field="*{nrOfChildren}" th:required="required">
                 <p>Number Of Adults</p>
-                <input type="number" class="form-control" th:field="*{nrOfAdults}">
+                <input type="number" class="form-control" th:field="*{nrOfAdults}" th:required="required">
                 <button class="btn btn-secondary">Save</button>
             </form>
         </div>
