@@ -1,15 +1,22 @@
-package pl.ml.model.family;
+package pl.ml.service;
 
+import io.micrometer.core.ipc.http.HttpSender;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import pl.ml.model.family.Family;
+import pl.ml.repository.FamilyRepository;
 import pl.ml.model.familyMember.FamilyMember;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class FamilyService {
     private FamilyRepository familyRepository;
+//    serverValue String URL (value)
 
     public FamilyService(FamilyRepository familyRepository) {
         this.familyRepository = familyRepository;
@@ -19,8 +26,8 @@ public class FamilyService {
         return null;
     }
 
-    public Family getFamily() {
-        return null;
+    public Optional<Family> getFamilyById(Long id) {
+        return familyRepository.findById(id);
     }
 
     public boolean validateFamilyData(Family family, List<FamilyMember> members) {
@@ -47,17 +54,21 @@ public class FamilyService {
         return familyRepository.findById(id);
     }
 
-//    public List<FamilyMember> getFamilyMembers() {
-//        RestTemplate restTemplate = new RestTemplate();
-////        FamilyMembers forObject = restTemplate.getForObject("http://localhost:9092/familySuccess?id=1", FamilyMembers.class);
-////        List<FamilyMember> data = forObject.getData();
-////        return data;
-//        return null;
-//    }
+    public List<FamilyMember> getFamilyMembers() {
+        RestTemplate restTemplate = new RestTemplate();
+        FamilyMember[] forObject = restTemplate.getForObject("http://localhost:8080/searchFamilyMember", FamilyMember[].class);
+        List<FamilyMember> members = Arrays.asList(forObject);
+        return members;
+    }
 
-//    public FamilyMember getFamilyMember(String url) {
-//        RestTemplate restTemplate = new RestTemplate();
-//        FamilyMember member = restTemplate.getForObject(url, FamilyMember.class);
-//        return member;
-//    }
+    public void saveFamilyMember() {
+        RestTemplate restTemplate = new RestTemplate();
+        System.out.println("beng!");
+        restTemplate.execute("http://localhost:8080/createFamilyMember", HttpMethod.GET, null, null);
+//        restTemplate.getForObject("http://localhost:8080/createFamilyMember", FamilyMember.class);
+//        restTemplate.delete("http://localhost:8080/createFamilyMember");
+//        FamilyMember[] forObject = restTemplate.getForObject("http://localhost:8080/createFamilyMember", FamilyMember[].class);
+//        List<FamilyMember> members = Arrays.asList(forObject);
+    }
+
 }

@@ -2,19 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Strona</title>
+    <title>Not Found</title>
     <link rel="stylesheet" th:href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
-<h3>Teraz można dodać nowego family membersa w drugiej apce</h3>
-<a th:href="@{/createFamilyMember(id=${member.familyId}, familyName=${member.familyName})}">Dodaj kolejnego</a>
-<table class="table">
-<p th:text="${member.givenName}"></p>
-<p th:text="${member.familyName}"></p>
-<p th:text="${member.age}"></p>
-<p th:text="${member.familyId}"></p>
-</table>
+<div class="center">
+    <div class="content">
+        <h2>Sorry, not found family with this number</h2>
+        <a th:href="@{/}" class="btn btn-secondary">Back to main page</a>
+    </div>
+</div>
 </body>
 </html>

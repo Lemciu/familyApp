@@ -18,6 +18,9 @@ public class FamilyMember {
         this.familyId = familyId;
     }
 
+    public FamilyMember() {
+    }
+
     public Long getId() {
         return id;
     }

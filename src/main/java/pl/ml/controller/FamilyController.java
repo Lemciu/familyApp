@@ -1,8 +1,10 @@
-package pl.ml.model.family;
+package pl.ml.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.ml.model.family.Family;
+import pl.ml.service.FamilyService;
 import pl.ml.model.familyMember.FamilyMember;
 import pl.ml.model.familyMember.FamilyMemberService;
 
@@ -19,14 +21,14 @@ public class FamilyController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("correctData", false);
+    public String home() {
         return "home";
     }
 
     @PostMapping("/createNewFamily")
     public String createNewFamily(Family family) {
         Long id = familyService.save(family);
+        Family.setCurrentFamilyId(id);
         return "redirect:/createFamilyMember?id=" + id + "&familyName=" + family.getFamilyName();
     }
 
@@ -42,20 +44,24 @@ public class FamilyController {
         return Family.getCurrentFamilyId();
     }
 
+//    obsłużyć te błędy ;]
+
     @GetMapping("/createFamilyMember")
     public String home7(@RequestParam Long id, @RequestParam String familyName, Model model) {
         model.addAttribute("familyMember", new FamilyMember(familyName, "", 0, id));
         model.addAttribute("familyId", id);
         model.addAttribute("familyName", familyName);
+        model.addAttribute("familyMembers", familyService.getFamilyMembers());
         Family.setCurrentFamilyId(id);
         return "familyMemberForm";
     }
 
     @PostMapping("/newFamilyMember")
-    public String createFamilyMember(FamilyMember familyMember, @RequestParam Long familyId, Model model) {
+    public String createFamilyMember(FamilyMember familyMember, @RequestParam Long familyId) {
         familyMember.setFamilyId(familyId);
         familyMemberService.save(familyMember);
-        return "redirect:/getFamilyMember";
+        familyService.saveFamilyMember();
+        return "redirect:/createFamilyMember?id=" + familyId + "&familyName=" + familyMember.getFamilyName();
     }
 
     @GetMapping("/getFamilyMember")
@@ -65,9 +71,13 @@ public class FamilyController {
     }
 
     @GetMapping("/getFamily")
-    @ResponseBody
-    public Long getFamily(@RequestParam Long id) {
-        return id;
+    public String getFamily(Long id) {
+        Family.setCurrentFamilyId(id);
+        if (familyService.getFamilyById(id).isPresent()) {
+            return "redirect:/familyInfo";
+        } else {
+            return "familyError";
+        }
     }
 
     @GetMapping("/success")
@@ -81,14 +91,17 @@ public class FamilyController {
     }
 
     @GetMapping("/findFamily")
-    public String findFamily() {
+    public String findFamily(Model model) {
+        model.addAttribute("currentId", Family.getCurrentFamilyId());
         return "findFamily";
     }
 
     @GetMapping("/familyInfo")
-    public String getFamilyInfo(@RequestParam Long id, Model model) {
-        if (familyService.findById(id).isPresent()) {
-            model.addAttribute("family", familyService.findById(id).get());
+    public String getFamilyInfo(Model model) {
+        if (familyService.findById(Family.getCurrentFamilyId()).isPresent()) {
+            model.addAttribute("family", familyService.findById(Family.getCurrentFamilyId()).get());
+            List<FamilyMember> members = familyService.getFamilyMembers();
+            model.addAttribute("familyMembers", members);
             return "familyInfo";
         } else {
             return "familyError";
@@ -97,12 +110,11 @@ public class FamilyController {
     }
 
     @GetMapping("/getFamilyMembers")
-    public String validateFamily(Model model) {
-        List<FamilyMember> familyMembers = familyMemberService.getFamilyMembers();
-        Long familyId = familyMemberService.getFamilyMember().getFamilyId();
-        boolean validate = familyService.validateFamilyData(familyService.findById(familyId).orElseThrow(), familyMembers);
+    public String validateFamily(@RequestParam Long id, Model model) {
+        List<FamilyMember> familyMembers = familyService.getFamilyMembers();
+        boolean validate = familyService.validateFamilyData(familyService.findById(id).orElseThrow(), familyMembers);
         model.addAttribute("correctData", validate);
-        model.addAttribute("familyNumber", familyId);
+        model.addAttribute("familyNumber", id);
         return "familySuccess";
     }
 

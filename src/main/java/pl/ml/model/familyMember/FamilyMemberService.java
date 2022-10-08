@@ -12,15 +12,9 @@ public class FamilyMemberService {
 
     public List<FamilyMember> getFamilyMembers() {
         RestTemplate restTemplate = new RestTemplate();
-//        FamilyMemberRepository forObject = restTemplate.getForObject("http://localhost:9092/getFamilyMembers", FamilyMemberRepository.class);
-//        FamilyMemberRepository forObject = restTemplate.getForObject("http://localhost:9092/getFamilyMembers", FamilyMemberRepository.class);
-        List<FamilyMember> result = new ArrayList<>();
-        result.add(new FamilyMember("Lemański", "Michał", 1, 1L));
-        result.add(new FamilyMember("Lemański", "Jan", 13, 1L));
-        result.add(new FamilyMember("Lemańska", "Ada", 44, 1L));
-
-//        return forObject.getFamilyMembers();
-        return result;
+        FamilyMemberRepository forObject = restTemplate.getForObject("http://localhost:8080/searchFamilyMember", FamilyMemberRepository.class);
+        List<FamilyMember> familyMembers = forObject.familyMembers;
+        return familyMembers;
     }
 
     public void save(FamilyMember familyMember) {

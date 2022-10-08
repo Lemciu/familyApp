@@ -1,7 +1,7 @@
 package pl.ml.model.family;
 
 import javax.persistence.*;
-
+//Lombok
 @Entity
 public class Family {
     @Id

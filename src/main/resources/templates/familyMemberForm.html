@@ -22,29 +22,13 @@
                 <input type="number" th:value="${familyId}" th:name="familyId" th:hidden="hidden">
                 <div class="buttons">
                     <input class="btn btn-secondary" type="submit" th:value="Add">
-                    <a id="finishButton" class="btn btn-secondary" th:href="@{/getFamilyId}">Finish</a>
-                    <a id="finishButton" class="btn btn-secondary" th:href="@{/getFamilyMembers}">Finish and validate</a>
+                    <a id="finishButton" class="btn btn-secondary" th:href="@{/getFamilyMembers(id=${familyId})}">Finish and validate</a>
                 </div>
             </form>
-<!--&lt;!&ndash;            <form method="get" th:action="@{/newFamilyMember}">&ndash;&gt;-->
-<!--                <h3>Add member</h3>-->
-<!--                <p>First Name:</p>-->
-<!--                <input type="text" class="form-control">-->
-<!--                <p>Last Name</p>-->
-<!--&lt;!&ndash;                <input type="text" class="form-control" th:field="*{familyName}">&ndash;&gt;-->
-<!--                <p>Age</p>-->
-<!--&lt;!&ndash;                <input type="number" class="form-control" th:field="*{age}">&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="number" th:value="${familyId}" th:name="familyId" th:hidden="hidden">&ndash;&gt;-->
-<!--                <div class="buttons">-->
-<!--                    <input class="btn btn-secondary" type="submit" th:value="Add">-->
-<!--                    <a id="finishButton" class="btn btn-secondary" th:href="|@{/familySuccess?id=}${familyId}|">Finish</a>-->
-<!--                    <a th:href="@{/getFamilyMember?familyName=kowal}">tu</a>-->
-<!--                </div>-->
-<!--&lt;!&ndash;            </form>&ndash;&gt;-->
         </div>
-<!--        <ul th:each="familyMember: ${familyMembers}" th:object="${familyMember}" class="list-group">-->
-<!--            <li th:text="|*{givenName} *{familyName} (*{age})|" class="list-group-item"></li>-->
-<!--        </ul>-->
+        <ul th:each="familyMember: ${familyMembers}" th:object="${familyMember}" class="list-group">
+            <li th:text="|*{givenName} *{familyName} (*{age})|" class="list-group-item"></li>
+        </ul>
     </div>
 </div>
 </body>
