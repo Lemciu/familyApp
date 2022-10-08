@@ -14,7 +14,6 @@ import java.util.Optional;
 @Service
 public class FamilyService {
     private FamilyRepository familyRepository;
-//    serverValue String URL (value)
 
     public FamilyService(FamilyRepository familyRepository) {
         this.familyRepository = familyRepository;

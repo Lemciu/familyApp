@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.ml.model.family.Family;
 import pl.ml.service.FamilyService;
 import pl.ml.model.familyMember.FamilyMember;
-import pl.ml.model.familyMember.FamilyMemberService;
+import pl.ml.service.FamilyMemberService;
 
 import java.util.List;
 
@@ -43,8 +43,6 @@ public class FamilyController {
     public Long getFamilyNumber() {
         return Family.getCurrentFamilyId();
     }
-
-//    obsłużyć te błędy ;]
 
     @GetMapping("/createFamilyMember")
     public String home7(@RequestParam Long id, @RequestParam String familyName, Model model) {

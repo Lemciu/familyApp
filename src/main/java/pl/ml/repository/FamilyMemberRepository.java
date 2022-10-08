@@ -1,6 +1,7 @@
-package pl.ml.model.familyMember;
+package pl.ml.repository;
 
-import java.util.ArrayList;
+import pl.ml.model.familyMember.FamilyMember;
+
 import java.util.List;
 
 public class FamilyMemberRepository {
