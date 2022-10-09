@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -14,6 +15,7 @@ public class Family {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String familyName;
     private Integer nrOfAdults;
     private Integer nrOfChildren;
@@ -34,4 +36,18 @@ public class Family {
     public static void setCurrentFamilyId(Long currentFamilyId) {
         Family.currentFamilyId = currentFamilyId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Family family = (Family) o;
+        return id.equals(family.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, familyName, nrOfAdults, nrOfChildren, nrOfInfants);
+    }
+
 }
