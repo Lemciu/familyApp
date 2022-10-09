@@ -45,7 +45,7 @@ public class FamilyController {
     }
 
     @GetMapping("/createFamilyMember")
-    public String home7(@RequestParam Long id, @RequestParam String familyName, Model model) {
+    public String createFamilyMember(@RequestParam Long id, @RequestParam String familyName, Model model) {
         model.addAttribute("familyMember", new FamilyMember(familyName, "", 0, id));
         model.addAttribute("familyId", id);
         model.addAttribute("familyName", familyName);
@@ -76,16 +76,6 @@ public class FamilyController {
         } else {
             return "familyError";
         }
-    }
-
-    @GetMapping("/success")
-    public String idk(@RequestParam String familyName,
-                      @RequestParam String givenName,
-                      @RequestParam Long familyId,
-                      @RequestParam Integer age,
-                      Model model) {
-        model.addAttribute("member", new FamilyMember(familyName, givenName, age, familyId));
-        return "success";
     }
 
     @GetMapping("/findFamily")

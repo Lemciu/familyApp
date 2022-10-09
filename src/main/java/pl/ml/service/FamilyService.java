@@ -19,10 +19,6 @@ public class FamilyService {
         this.familyRepository = familyRepository;
     }
 
-    public Long createFamily() {
-        return null;
-    }
-
     public Optional<Family> getFamilyById(Long id) {
         return familyRepository.findById(id);
     }

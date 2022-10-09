@@ -1,10 +1,14 @@
 package pl.ml.model.familyMember;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
 public class FamilyMember {
     private Long id;
     private String familyName;
@@ -21,7 +25,9 @@ public class FamilyMember {
         this.familyId = familyId;
     }
 
-    public FamilyMember() {
+    public FamilyMember(String familyName, String givenName, Integer age) {
+        this.familyName = familyName;
+        this.givenName = givenName;
+        this.age = age;
     }
-
 }
